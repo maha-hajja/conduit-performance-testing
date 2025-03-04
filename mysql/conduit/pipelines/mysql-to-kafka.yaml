@@ -1,0 +1,25 @@
+version: "2.2"
+pipelines:
+    - id: mysql-to-kafka
+      status: stopped
+      name: mysql-to-kafka
+      description: MySQL to Kafka
+      connectors:
+        - id: mysql-source
+          type: source
+          plugin: builtin:mysql
+          settings:
+            dsn: root:root@tcp(mysql1:3306)/testdb
+            tables: users
+        - id: kafka-destination
+          type: destination
+          plugin: builtin:kafka
+          name: kafka-destination
+          settings:
+            servers: "broker:29092"
+            topic: destination-topic
+            compression: "none"
+            sdk.batch.size: 10000
+            sdk.batch.delay: "1s"
+#            sdk.record.format: "opencdc/json"
+#            sdk.record.format.options: "position.excluded=true"

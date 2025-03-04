@@ -1,0 +1,14 @@
+services:
+  conduit:
+    image: 'ghcr.io/hariso/custom-conduit:v0.5.0'
+    container_name: conduit
+    volumes:
+      - './pipelines/mysql-to-kafka.yaml:/app/pipelines/mysql-to-kafka.yaml'
+    ports:
+      - '8081:8080'
+    networks:
+      - benchi
+
+networks:
+  benchi:
+    external: true

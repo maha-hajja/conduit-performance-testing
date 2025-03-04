@@ -1,0 +1,6 @@
+[mysqld]
+server-id=1
+log-bin=mysql-bin
+binlog-do-db=testdb
+binlog_format=ROW
+binlog_row_image=full
